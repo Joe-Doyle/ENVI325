@@ -1,0 +1,65 @@
+//-------------------------------------------------
+// NAME:    Joe Doyle, MCLA
+// CONTACT: jd5540@mcla.edu
+// CLASS:   ENVI-325 GIS
+// DATE:    11/30/2021
+//-------------------------------------------------
+
+//Default text to update
+var returnText = 'I don\'t have enough data to introduce myself :('
+
+//Snag useful vars
+var name_bool   = !IsEmpty($feature.TREE_NAME) //Is the tree named?
+var height_bool = !IsEmpty($feature.HEIGHT) //Is height recorded?
+var d_bool      = !IsEmpty($feature.DIAMETER) //Is diameter recorded?
+var spec_bool   = !IsEmpty($feature.SPECIES_NEW) //Is species recorded?
+var ded_bool    = !IsEmpty($feature.DEDICATION_NAME) //Is a dedication noted?
+
+//Say name if existent
+if (name_bool){
+    returnText = 'Hi! My name is ' + $feature.TREE_NAME
+    if (spec_bool){
+        returnText += ', and I\'m a ' + $feature.SPECIES_NEW + '! '
+    }
+    else{
+        returnText += '! '
+    }
+}
+
+//Say height and diameter, or height only if no diameter recorded
+if (height_bool){
+    if(!name_bool){     //clear default text if there is height but no name
+        if (spec_bool){
+            returnText = 'Hi! I\'m a ' + $feature.SPECIES_NEW + '. '
+            returnText += 'I don\'t have a name yet, but '
+        }
+        else{
+            returnText = 'Hi! I don\'t have a name yet, but '
+        }
+    }
+    if (d_bool){
+        returnText += 'I\'m ' + $feature.HEIGHT + ' feet tall and ' + $feature.DIAMETER
+        if($feature.DIAMETER == 1){
+            returnText += " inch in diameter! "
+        }
+        else{
+            returnText += " inches in diameter! "
+        }
+    }
+    else{
+        returnText += 'I\'m ' + $feature.HEIGHT + 'feet tall!'
+    }
+}
+
+//Say dedication if noted
+if (ded_bool){
+    returnText += '\n\nI\'m dedicated to ' + $feature.DEDICATION_NAME
+}
+
+
+//If stump, ignore everything else and leave it at that
+if ($feature.LIFE_STATUS == 'Stump'){
+    returnText = 'I\'m just a lowly stump. Ho hum.'
+}
+
+return returnText
