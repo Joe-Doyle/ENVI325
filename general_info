@@ -59,7 +59,12 @@ if (ded_bool){
 
 //If stump, ignore everything else and leave it at that
 if ($feature.LIFE_STATUS == 'Stump'){
-    returnText = 'I\'m just a lowly stump. Ho hum.'
+    if (name_bool){
+        returnText = 'Hi! I\'m ' + $feature.TREE_NAME + ', a lowly stump. Ho hum.'
+    }
+    else{
+        returnText = 'I\'m just a lowly stump. Ho hum.'
+    }
 }
 
 return returnText
