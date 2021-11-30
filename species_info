@@ -1,0 +1,19 @@
+//-------------------------------------------------
+// NAME:    Joe Doyle, MCLA
+// CONTACT: jd5540@mcla.edu
+// CLASS:   ENVI-325 GIS
+// DATE:    11/30/2021
+//-------------------------------------------------
+
+//In progress...
+
+//extra species info
+var spec_bool   = !IsEmpty($feature.SPECIES_NEW)
+var species_info = {
+    'Ginkgo': 'https://en.wikipedia.org/wiki/Ginkgo_biloba',
+    'American Elm': 'https://en.wikipedia.org/wiki/Ulmus_americana',
+    'American White Cedar': 'https://en.wikipedia.org/wiki/Thuja_occidentalis',
+    'Blue Spruce': 'https://en.wikipedia.org/wiki/Blue_spruce'
+}
+
+return species_info[$feature.SPECIES_NEW]
