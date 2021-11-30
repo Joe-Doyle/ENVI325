@@ -1,0 +1,34 @@
+//-------------------------------------------------
+// NAME:    Joe Doyle, MCLA
+// CONTACT: jd5540@mcla.edu
+// CLASS:   ENVI-325 GIS
+// DATE:    11/30/2021
+//-------------------------------------------------
+
+//In progress...
+
+//extra species info
+var spec_bool   = !IsEmpty($feature.SPECIES_NEW)
+var species_info = {
+    'Ginkgo':
+    'American Elm':
+    'Blue Spruce':
+    'Japanese Zelkova':
+    'Red Maple':
+    'Northern Red Oak':
+    'Norway Maple':
+    'White Cedar':
+    'English Oak':
+    'Callery Pear':
+    'Northern Pin Oak':
+    'Shingle Oak':
+    'Cherry Plum':
+    'Sweet Cherry':
+    'Stump':
+    'Paper Birch':
+    'Common Lilac':
+    'Other':
+    'Paradise Apple':
+}
+
+return species_info[$feature.SPECIES_NEW]
