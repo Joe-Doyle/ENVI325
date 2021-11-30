@@ -1,0 +1,12 @@
+//-------------------------------------------------
+// NAME:    Joe Doyle, MCLA
+// CONTACT: jd5540@mcla.edu
+// CLASS:   ENVI-325 GIS
+// DATE:    11/30/2021
+//-------------------------------------------------
+
+var notes_bool = !IsEmpty($feature.NOTES)
+
+if (notes_bool){
+    return 'Notes: ' + $feature.NOTES
+}
