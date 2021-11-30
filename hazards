@@ -1,0 +1,18 @@
+//-------------------------------------------------
+// NAME:    Joe Doyle, MCLA
+// CONTACT: jd5540@mcla.edu
+// CLASS:   ENVI-325 GIS
+// DATE:    11/30/2021
+//-------------------------------------------------
+
+var hazard_bool = iif($feature.HAZARD_BOOL == 'Yes', true, false)
+var hazard_text_bool = !IsEmpty($feature.HAZARD_DESC)
+
+if (hazard_bool){
+    if (hazard_text_bool){
+        return 'Hazard reported: ' + $feature.HAZARD_DESC
+    }
+    else{
+        return 'Hazard reported, no further details known.'
+    }
+}
