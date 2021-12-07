@@ -14,6 +14,7 @@ var height_bool = !IsEmpty($feature.HEIGHT) //Is height recorded?
 var d_bool      = !IsEmpty($feature.DIAMETER) //Is diameter recorded?
 var spec_bool   = !IsEmpty($feature.SPECIES_NEW) //Is species recorded?
 var ded_bool    = !IsEmpty($feature.DEDICATION_NAME) //Is a dedication noted?
+var ns_bool     = (!IsEmpty($feature.NUMBER_STEMS)) && ($feature.NUMBER_STEMS != 1) //Are multiple stems noted?
 
 //Say name if existent
 if (name_bool){
@@ -38,12 +39,29 @@ if (height_bool){
         }
     }
     if (d_bool){
-        returnText += 'I\'m ' + $feature.HEIGHT + ' feet tall and ' + $feature.DIAMETER
-        if($feature.DIAMETER == 1){
-            returnText += " inch in diameter! "
+        returnText += 'I\'m ' + $feature.HEIGHT + ' feet tall' 
+        //if multiple stems, change sentence structure to list
+        if (ns_bool){
+            returnText += ", "
         }
         else{
-            returnText += " inches in diameter! "
+            returnText += ' and ' 
+        }
+        
+        returnText += $feature.DIAMETER
+        //use inch or inches as appropriate
+        if($feature.DIAMETER == 1){
+            returnText += " inch in diameter"
+        }
+        else{
+            returnText += " inches in diameter"
+        }
+        //if multiple stems, add the number
+        if (ns_bool){
+            returnText += ", and I have " + $feature.NUMBER_STEMS + " stems!"
+        }
+        else{
+            returnText += "!"
         }
     }
     else{
